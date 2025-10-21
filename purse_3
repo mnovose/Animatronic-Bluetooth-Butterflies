@@ -1,1 +1,62 @@
+//////////////////////////////////////////////
+//        RemoteXY include library          //
+//////////////////////////////////////////////
 
+#define REMOTEXY__DEBUGLOG    
+#define REMOTEXY_MODE__ESP32CORE_BLE
+#define REMOTEXY_BLUETOOTH_NAME "RemoteXY"
+
+#include <BLEDevice.h>
+#include <RemoteXY.h>
+#include <ESP32Servo.h>
+
+Servo servo5;
+
+// RemoteXY configuration  
+#pragma pack(push, 1)
+uint8_t RemoteXY_CONF[] =   // 28 bytes
+  { 255,1,0,0,0,21,0,17,0,0,0,31,1,106,200,1,1,1,0,1,
+  40,35,24,24,0,134,31,0 };
+
+// This structure defines all the variables and events of your control interface 
+struct {
+  uint8_t button_01;   // =1 if button pressed
+  uint8_t connect_flag;
+} RemoteXY;
+#pragma pack(pop)
+
+/////////////////////////////////////////////
+//           END RemoteXY include          //
+/////////////////////////////////////////////
+
+void setup() {
+  RemoteXY_Init(); 
+  Serial.begin(9600);
+  delay(1500);
+
+  servo5.attach(10);
+  servo5.write(90); // neutral starting position
+}
+
+void loop() { 
+  RemoteXY_Handler();
+
+  if (RemoteXY.button_01) {
+    Serial.println("Pressed");
+
+    // Smooth flapping motion
+    for (int pos = 10; pos <= 170; pos++) {
+      servo5.write(pos);
+      RemoteXY_delay(10);
+    }
+    for (int pos = 170; pos >= 10; pos--) {
+      servo5.write(pos);
+      RemoteXY_delay(10);
+    }
+
+  } else {
+    Serial.println("Not pressed");
+    servo5.write(90); // reset to neutral
+    RemoteXY_delay(50);
+  }
+}
