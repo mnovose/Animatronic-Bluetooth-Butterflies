@@ -1,4 +1,5 @@
 # Animatronic-Bluetooth-Butterflies  
+Collaborators: Sophia Deng, Riya Jwalanna  
 We created three interactive purses, each with increasing levels of difficulty and unique objectives.
   
  - **Purse 1:** One buttterfly - powered by Arduino Uno R3, obtained a natural movement of the wings that was smooth and varied
