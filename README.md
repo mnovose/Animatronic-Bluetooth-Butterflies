@@ -6,3 +6,16 @@
 > - **Purse 3:** Bluetooth control via Arduino Nano ESP32 and RemoteXY
 >  
 > All three designs, had similar challenges involving power supply selection, wiring layout, butterfly wing attachment, and concealment of electronic components within the purse structure.
+>
+>  **Hardware**  
+> - Arduino Uno R3
+> - Arduino Nano ESP32  
+> - Arduino Leonardo  
+- GS-9018 micro servos   
+- Power supply (battery pack)  
+- Butterfly wing mechanism (servo linkage system)  
+
+**💾 Software**  
+- Arduino IDE  
+- RemoteXY app (Bluetooth control)  
+- Onshape  
