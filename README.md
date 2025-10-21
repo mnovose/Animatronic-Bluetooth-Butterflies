@@ -15,7 +15,7 @@ We created three interactive purses, each with increasing levels of difficulty a
  - Power supply (battery pack)  
  - Butterfly wing mechanism (servo linkage system)  
 
- **💾 Software**  
+ **Software**  
  - Arduino IDE  
  - RemoteXY app (Bluetooth control)  
  - Onshape  
