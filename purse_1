@@ -1,0 +1,73 @@
+```cpp
+#include "thingProperties.h"
+#include <ESP32Servo.h>
+
+Servo servo5;
+Servo servo6;
+
+ESP32PWM pwm;
+
+void setup() {
+  // Initialize serial and wait for port to open:
+  Serial.begin(9600);
+  // This delay gives the chance to wait for a Serial Monitor without blocking if none is found
+  delay(1500);
+
+  // Defined in thingProperties.h
+  initProperties();
+
+  servo6.attach(9);
+  servo5.attach(10);
+
+  int Pos = 60;
+
+  // Connect to Arduino IoT Cloud
+  ArduinoCloud.begin(ArduinoIoTPreferredConnection);
+  setDebugMessageLevel(2);
+  ArduinoCloud.printDebugInfo();
+}
+
+void loop() {
+  ArduinoCloud.update();
+  int Pos = 800;
+  long delS = random(4, 6);
+  long delF = random(2, 4);
+
+  for (Pos = 900; Pos <= 1100; Pos++) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delS / 2);
+  }
+
+  for (Pos = 1100; Pos >= 800; Pos--) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delS / 2);
+  }
+
+  delS = random(4, 7);
+
+  for (Pos = 800; Pos <= 1100; Pos++) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delS / 2);
+  }
+
+  for (Pos = 1100; Pos >= 800; Pos--) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delS / 2);
+  }
+
+  for (Pos = 800; Pos <= 1100; Pos++) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delF / 2);
+  }
+
+  for (Pos = 1100; Pos >= 900; Pos--) {
+    servo5.writeMicroseconds(Pos + 750);
+    servo6.writeMicroseconds(Pos + 750);
+    delay(delF / 2);
+  }
+}
